@@ -1,0 +1,7 @@
+{
+  "extends": "@tsconfig/node18/tsconfig.json",
+  "include": ["server", "db"],
+  "compilerOptions": {
+    "outDir": "bin"
+  }
+}
