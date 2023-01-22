@@ -1,6 +1,6 @@
 //const sqlite3 = require('sqlite3').verbose();
 
-import mongoose, { model, Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 
 export const startDb = async () => {
@@ -22,10 +22,10 @@ export const stopDb = async () => {
   }
 };
 
-interface ILocation {
-  name: string,
-  attributes: string[],
-  count: number
+export interface ILocation {
+  name: string;
+  attributes: string[];
+  count: number;
 }
 
 const locationSchema = new Schema<ILocation>({
@@ -36,11 +36,11 @@ const locationSchema = new Schema<ILocation>({
 
 const Location = mongoose.model("location", locationSchema);
 
-const saveLocationInfo = async ({name, attributes, count}: ILocation) => {
+const saveLocationInfo = async ({ name, attributes, count }: ILocation) => {
   const results = await Location.updateOne(
     {
       name,
-      attributes
+      attributes,
     },
     { count },
     { upsert: true }
@@ -49,7 +49,7 @@ const saveLocationInfo = async ({name, attributes, count}: ILocation) => {
 };
 
 const getAllLocationInfo = async () => {
-  const results = await Location.find({}, {}, {limit: 20});
+  const results = await Location.find({}, {}, { limit: 20 });
   return results;
 };
 

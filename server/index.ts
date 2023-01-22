@@ -1,6 +1,7 @@
-const path = require('path');
-const express = require('express');
-const cors = require('cors');
+import path from 'path';
+import express from 'express';
+import cors from 'cors';
+import { getLocationInfo } from './services/location-processing.service';
 
 const {startDb, stopDb} = require('../db')
 
@@ -14,6 +15,17 @@ app
   .use(express.urlencoded({ extended: true }));
 
 // Routes
+
+const router = express.Router()
+router.use("/api")
+router.get("/locations", async (req, res) => {
+  const locations = await getLocationInfo();
+  res.json({
+    data: locations
+  }).status(200)
+})
+
+app.use(router)
 
 startDb()
 
