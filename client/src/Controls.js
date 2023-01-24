@@ -14,26 +14,31 @@ export const Controls = ({
 }) => {
   const renderItems = () => {
     return filterItems.map((item) => {
-      const label = item.replaceAll("_", " ")
+      const label = item.replaceAll("_", " ");
       return (
-      <FormControlLabel value={item} control={<Radio />} label={label} />
-    )});
+        <FormControlLabel value={item} control={<Radio />} label={label} />
+      );
+    });
   };
 
   return (
     <div>
-      <FormControl>
-        <FormLabel id="radio-buttons-group-label">Accommodation</FormLabel>
-        <RadioGroup
-          row
-          aria-labelledby="radio-buttons-group-label"
-          name="row-radio-buttons-group"
-          onChange={onFilterChange}
-          value={selectedFilter}
-        >
-          {renderItems()}
-        </RadioGroup>
-      </FormControl>
+      {filterItems.length ? (
+        <FormControl>
+          <FormLabel id="radio-buttons-group-label">Accommodation</FormLabel>
+          <RadioGroup
+            row
+            aria-labelledby="radio-buttons-group-label"
+            name="row-radio-buttons-group"
+            onChange={onFilterChange}
+            value={selectedFilter}
+          >
+            {renderItems()}
+          </RadioGroup>
+        </FormControl>
+      ) : (
+        null
+      )}
       <div>
         <Button variant="contained" title="sync" onClick={onSyncClick}>
           Sync
