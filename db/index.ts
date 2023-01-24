@@ -1,12 +1,9 @@
-//const sqlite3 = require('sqlite3').verbose();
-
 import mongoose, { Schema } from "mongoose";
-import { MongoMemoryServer } from "mongodb-memory-server";
 
 export const startDb = async () => {
   try {
-    const mongoServer = await MongoMemoryServer.create();
-    await mongoose.connect(mongoServer.getUri(), { dbName: "verifyMASTER" });
+    const url = "mongodb://localhost:27017";
+    await mongoose.connect(url, { dbName: "nfx-app" });
     console.log("Connected to database successfully");
   } catch (error) {
     console.error("failed to connect to database", error);

@@ -23,18 +23,12 @@ export const syncLocationData = async () => {
 
   for (const location of locations) {
     for (const attribute of attributes) {
-      apiTasks.push(
-        (async () => {
-          const count = await getRestaurantCountByAttribute("pittsburgh", [
-            "gender_neutral_restrooms",
-          ]);
-          locationInfoRecords.push({
-            name: location,
-            count,
-            attributes: [attribute],
-          });
-        })()
-      );
+      const count = await getRestaurantCountByAttribute(location, [attribute]);
+      locationInfoRecords.push({
+        name: location,
+        count,
+        attributes: [attribute],
+      });
     }
   }
 

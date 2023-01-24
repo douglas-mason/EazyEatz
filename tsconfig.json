@@ -1,7 +1,10 @@
 {
   "extends": "@tsconfig/node18/tsconfig.json",
   "include": ["server", "db"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
-    "outDir": "bin"
+    "outDir": "bin",
+    "skipLibCheck": true,
+    "resolveJsonModule": true
   }
 }
